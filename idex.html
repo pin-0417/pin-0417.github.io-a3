@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hidden City - Prototype</title>
+  </head>
+  <body>
+    <main class="app">
+      <!-- Home page -->
+      <section id="home-screen" class="screen">
+        <div class="home-panel">
+          <h1 id="title">Hidden City</h1>
+          <p id="description">
+            Explore the city illustration and find all 5 hidden coffee cups.
+            Click each hidden cup to reveal it. Find all 5 to win!
+          </p>
+          <button id="start-button" class="start-button">Play</button>
+        </div>
+      </section>
+
+      <!-- Game Page -->
+      <section id="game-screen" class="screen hidden" aria-hidden="true">
+        <div class="title-container">
+          <header class="header-left">
+            <button id="homeNav" class="home-nav" title="Back to Home">
+              Hidden City
+            </button>
+            <div class="header-center">
+              <div class="hint">
+                <img src="hint.png" alt="Hint Icon" class="hint-icon" />
+                <div class="hint-label">Find: Coffee Cup</div>
+              </div>
+            </div>
+            <div class="header-right">
+              <div id="timer" class="timer" aria-live="polite">00:00</div>
+            </div>
+          </header>
+
+          <!-- game area -->
+          <section class="game-area" id="game-area">
+            <div class=""></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
