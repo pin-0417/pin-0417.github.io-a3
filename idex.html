@@ -36,13 +36,44 @@
               <div id="timer" class="timer" aria-live="polite">00:00</div>
             </div>
           </header>
-
-          <!-- game area -->
-          <section class="game-area" id="game-area">
-            <div class=""></div>
-          </section>
         </div>
+        <!-- game area -->
+        <section class="game-area" id="game-area">
+          <div class="game-wrapper" id="game-wrapper">
+            <img
+              src="city-illustration.png"
+              alt="City Illustration"
+              class="city-illustration"
+            />
+            <div
+              id="hotspot-layer"
+              class="hotspot-layer"
+              aria-hidden="true"
+            ></div>
+          </div>
+
+          <aside class="hud">
+            <div class="scoreboard">
+              <img
+                src="progress/progress.png"
+                alt="progress"
+                class="scoreboard-img"
+              />
+            </div>
+
+            <div class="message-area">
+              <div id="message" class="message">
+                Find all the coffee cups hidden in the scene.
+              </div>
+            </div>
+
+            <div class="controls">
+              <button id="resetBtn">Restart</button>
+            </div>
+          </aside>
+        </section>
       </section>
+      <!-- instruction -->
     </main>
   </body>
 </html>
