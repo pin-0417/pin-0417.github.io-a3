@@ -15,17 +15,19 @@
             Explore the city illustration and find all 5 hidden coffee cups.
             Click each hidden cup to reveal it. Find all 5 to win!
           </p>
-          <button id="start-button" class="start-button">Play</button>
+          <button id="start-button" class="btn">Play</button>
         </div>
       </section>
 
       <!-- Game Page -->
       <section id="game-screen" class="screen hidden" aria-hidden="true">
-        <div class="title-container">
-          <header class="header-left">
-            <button id="homeNav" class="home-nav" title="Back to Home">
-              Hidden City
-            </button>
+        <div class="game-container">
+          <header class="game-header">
+            <div class="header-left">
+              <button id="homeNav" class="home-nav" title="Back to Home">
+                Hidden City
+              </button>
+            </div>
             <div class="header-center">
               <div class="hint">
                 <img src="hint.png" alt="Hint Icon" class="hint-icon" />
@@ -37,9 +39,9 @@
             </div>
           </header>
         </div>
-        <!-- game area -->
+        <!-- Game area -->
         <section class="game-area" id="game-area">
-          <div class="game-wrapper" id="game-wrapper">
+          <div class="game-wrapper" id="image-wrapper">
             <img
               src="city-illustration.png"
               alt="City Illustration"
@@ -52,6 +54,7 @@
             ></div>
           </div>
 
+          <!-- Scoreboard -->
           <aside class="hud">
             <div class="scoreboard">
               <img
@@ -61,19 +64,62 @@
               />
             </div>
 
+            <!-- Message -->
             <div class="message-area">
               <div id="message" class="message">
                 Find all the coffee cups hidden in the scene.
               </div>
+              `
             </div>
 
+            <!-- Controls-->
             <div class="controls">
-              <button id="resetBtn">Restart</button>
+              <button id="resetBtn" class="btn">Restart</button>
             </div>
           </aside>
         </section>
       </section>
-      <!-- instruction -->
+      <!-- Instruction -->
+      <button
+        id="intructionBtn"
+        class="intructions-floating"
+        aria-expanded="false"
+        aria-controls="instructionsPanel"
+        aria-label="How to Play"
+      >
+        <img src="instruction.png" alt="Info" class="instructions-img" />
+      </button>
+
+      <!-- Instructions panel -->
+      <div id="instructionsPanel" class="instructions-panel hidden">
+        <h4 id="instrTitle">How to play</h4>
+        <ul>
+          <li>Click the Play button to start.</li>
+          <li>Use the hint image (coffee cup) to know what to look for.</li>
+          <li>
+            Click the correct spots on the city image to reveal coffee cups.
+          </li>
+          <li>You need to find all 5 coffee cups to win.</li>
+          <li>The timer at the top-right shows how long you spent.</li>
+        </ul>
+        <button id="instrcClose" class="btn small">Close</button>
+      </div>
+      <!-- Congratulations Panel -->
+      <div
+        id="congratsPanel"
+        class="congrats-panel hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="congratsTitle"
+        aria-describedby="congratsMessage"
+      >
+        <h2 id="congratsTitle">Congratulations!</h2>
+        <p id="congratsMessage">You found all the coffee cups!</p>
+        <div class="congrat-actions">
+          <button id="playAgainBtn" class="btn">Play Again</button>
+          <button id="backHome" class="btn muted">Back to Home</button>
+        </div>
+      </div>
     </main>
   </body>
 </html>
