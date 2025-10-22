@@ -1,9 +1,9 @@
 const hotspots = [
-  { id: "hotspot-1", x: 8, y: 18, width: 5, height: 5 },
-  { id: "hotspot-2", x: 30, y: 22, width: 5, height: 5 },
-  { id: "hotspot-3", x: 71, y: 15, width: 6, height: 6 },
-  { id: "hotspot-4", x: 49, y: 87, width: 5, height: 5 },
-  { id: "hotspot-5", x: 35, y: 28, width: 5, height: 5 },
+  { id: "hotspot-1", x: 3.5, y: 11, width: 3, height: 3, cupId: 2 },
+  { id: "hotspot-2", x: 61, y: 18, width: 3, height: 3, cupId: 5 },
+  { id: "hotspot-3", x: 74.7, y: 19, width: 8.3, height: 12, cupId: 1 },
+  { id: "hotspot-4", x: 37, y: 85, width: 3, height: 4, cupId: 4 },
+  { id: "hotspot-5", x: 32.3, y: 26, width: 3.4, height: 4, cupId: 3 },
 ];
 
 let foundCups = [];
@@ -21,7 +21,7 @@ const hotspotLayer = document.getElementById("hotspot-layer");
 const progressContainer = document.getElementById("progress-container");
 const instructionsBtn = document.getElementById("instructionsBtn");
 const instructionsPanel = document.getElementById("instructionsPanel");
-const instrClose = document.querySelector("#instrClose");
+const instrClose = document.getElementById("instrClose");
 console.log(instrClose);
 const congratsPanel = document.getElementById("congratsPanel");
 const congratsTime = document.getElementById("congratsTime");
@@ -46,13 +46,14 @@ function init() {
 function positionCoffeeCups() {
   for (let i = 0; i < hotspots.length; i++) {
     const spot = hotspots[i];
-
-    const cupNum = i + 1;
-    const cupImg = document.getElementById(`cup-${cupNum}`);
+    const cupId = spot.cupId;
+    const cupImg = document.getElementById(`cup-${cupId}`);
 
     if (cupImg) {
-      cupImg.style.top = `${spot.y}%`;
-      cupImg.style.left = `${spot.x}%`;
+      cupImg.style.top = "0";
+      cupImg.style.left = "0";
+      cupImg.style.width = "100%";
+      cupImg.style.height = "100%";
     }
   }
 }
@@ -72,21 +73,24 @@ function createHotspots() {
     hotspotDiv.style.transform = "translate(-50%, -50%)";
 
     hotspotDiv.addEventListener("click", function () {
-      clickHotspot(spot.id);
+      clickHotspot(spot.id, spot.cupId);
     });
 
     hotspotLayer.appendChild(hotspotDiv);
   }
 }
 
-// Create progress cups
+// Create progress bar
 function createProgressCups() {
   progressContainer.innerHTML = "";
+  const title = document.createElement("h3");
+  title.textContent = "Progress";
+  progressContainer.parentElement.insertBefore(title, progressContainer);
   for (let i = 1; i <= 5; i++) {
     const cupImg = document.createElement("img");
-    cupImg.src = `progress/progress${i}.png`;
+    cupImg.src = `progress/grey-cup.png`;
     cupImg.alt = `Coffee Cup ${i}`;
-    cupImg.className = "progress-cup hidden";
+    cupImg.className = "progress-cup";
     cupImg.id = `progress-cup-${i}`;
     progressContainer.appendChild(cupImg);
   }
@@ -111,6 +115,7 @@ function goToHome() {
   gameScreen.classList.add("hidden");
   homeScreen.classList.remove("hidden");
   stopTimer();
+  hideInstructions();
 }
 
 // Reset the game state
@@ -133,69 +138,58 @@ function resetHotspots() {
     if (hotspotDiv) {
       hotspotDiv.classList.remove("found");
     }
-    const cupNum = i + 1;
-    const cupImg = document.getElementById(`cup-${cupNum}`);
+    const cupId = spot.cupId;
+    const cupImg = document.getElementById(`cup-${cupId}`);
     if (cupImg) {
       cupImg.classList.add("hidden");
       cupImg.classList.remove("found");
     }
-    const progressCup = document.getElementById(`progress-cup-${cupNum}`);
-    if (progressCup) {
-      progressCup.classList.add("hidden");
+    for (let i = 1; i <= 5; i++) {
+      const progressCup = document.getElementById(`progress-cup-${i}`);
+      if (progressCup) {
+        progressCup.src = `progress/grey-cup.png`;
+      }
     }
   }
 }
 
 // create function to handle hotspot click
-function clickHotspot(id) {
-  if (foundCups.includes(id)) {
-    flashMessage("Already found!");
+function clickHotspot(hotspotId, cupId) {
+  if (foundCups.includes(hotspotId)) {
     return;
   }
 
-  foundCups.push(id);
-  markHotspotFound(id);
+  foundCups.push(hotspotId);
+  markHotspotFound(hotspotId, cupId);
   updateProgress();
   updateMessage();
   checkWin();
 }
 
 // Mark hotspot as found
-function markHotspotFound(id) {
-  const hotspotDiv = document.getElementById(id);
+function markHotspotFound(hotspotId, cupId) {
+  const hotspotDiv = document.getElementById(hotspotId);
   if (hotspotDiv) {
     hotspotDiv.classList.add("found");
   }
-
-  const parts = id.split("-");
-  const cupNum = parts[1];
-  const cupImg = document.getElementById(`cup-${cupNum}`);
+  const cupImg = document.getElementById(`cup-${cupId}`);
   if (cupImg) {
     cupImg.classList.remove("hidden");
     cupImg.classList.add("found");
-  }
-  const progressCup = document.getElementById(`progress-cup-${cupNum}`);
-  if (progressCup) {
-    progressCup.classList.remove("hidden");
   }
 }
 
 // Update progress display
 function updateProgress() {
+  const cupsFound = foundCups.length;
   for (let i = 1; i <= 5; i++) {
-    const cupDiv = document.getElementById(`progress-cup-${i}`);
-    const hotspotId = `hotspot-${i}`;
-    let isFound = false;
-    for (let j = 0; j < foundCups.length; j++) {
-      if (foundCups[j] === hotspotId) {
-        isFound = true;
-        break;
+    const progressCup = document.getElementById(`progress-cup-${i}`);
+    if (progressCup) {
+      if (i <= cupsFound) {
+        progressCup.src = `progress/white-cup.png`;
+      } else {
+        progressCup.src = `progress/grey-cup.png`;
       }
-    }
-    if (isFound) {
-      cupDiv.classList.remove("hidden");
-    } else {
-      cupDiv.classList.add("hidden");
     }
   }
 }
@@ -217,7 +211,7 @@ function updateMessage() {
 function checkWin() {
   if (foundCups.length === 5) {
     stopTimer();
-    showCongrats();
+    setTimeout(showCongrats, 500);
   }
 }
 
@@ -235,11 +229,13 @@ function hideCongrats() {
 // Show instructions panel
 function showInstructions() {
   instructionsPanel.classList.remove("hidden");
+  instructionsBtn.setAttribute("aria-expanded", "true");
 }
 
 // Close instructions panel
 function hideInstructions() {
   instructionsPanel.classList.add("hidden");
+  instructionsBtn.setAttribute("aria-expanded", "false");
 }
 
 // Timer functions

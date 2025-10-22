@@ -16,6 +16,9 @@ body {
 .app {
   min-height: 100vh;
   position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 /* screen management */
@@ -86,7 +89,6 @@ body {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -102,12 +104,23 @@ body {
 
 .btn.small {
   padding: 12px 35px;
-  font-size: 1.4rem;
+  font-size: 1.15rem;
 }
 
 #resetBtn {
   padding: 16px 45px;
-  font-size: 1.15rem;
+  font-size: 2rem;
+}
+#backHomeBtn {
+  font-size: 2rem;
+  background-color: #ffffff;
+  border: 3px solid #000000;
+}
+
+#playAgainBtn {
+  font-size: 2rem;
+  background-color: #ffffff;
+  border: 3px solid #000000;
 }
 
 /* game-screen */
@@ -125,11 +138,10 @@ body {
 .game-header {
   background: rgb(255, 255, 255);
   color: #000000;
-  padding: 20px 40px;
+  padding: 20px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   position: sticky;
   top: 0;
   z-index: 50;
@@ -147,7 +159,7 @@ body {
 }
 .header-center {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .header-right {
   display: flex;
@@ -157,11 +169,16 @@ body {
 .home-nav {
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 4rem;
   cursor: pointer;
   padding: 8px 16px;
   border-radius: 8px;
   transition: all 0.2s;
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings: "HEXP" 0;
 }
 
 .home-nav:hover {
@@ -173,28 +190,29 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 24px;
+  padding: 10px 22px;
   border: 2px solid #000000;
   border-radius: 30px;
   box-shadow: 0 2px 8px rgba(124, 124, 123, 0.2);
 }
 
 .hint-icon {
-  width: 35px;
-  height: 35px;
+  width: 100px;
+  height: 70px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .hint-label {
   font-weight: 700;
   color: #000000;
-  font-size: 1.05rem;
+  font-size: 2rem;
+  padding-right: 13px;
 }
 
 .timer {
   font-weight: 700;
   color: #000000;
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   font-family: "Courier New", monospace;
   background: #f8f9fa;
   padding: 8px 20px;
@@ -236,4 +254,251 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+.coffee-cup {
+  position: absolute;
+  pointer-events: none;
+  object-fit: contain;
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.coffee-cup.found {
+  opacity: 1;
+  transform: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hotspot {
+  position: absolute;
+  background: transparent;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.hotspot.found {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.hud {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.scoreboard {
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 20px;
+  padding: 20px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.scoreboard h3 {
+  font-size: 3rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.progress-cup {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transition: all 0.4s ease;
+  flex-shrink: 0;
+}
+
+.message-area {
+  background: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.message {
+  font-size: 1.8rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.instructions-floating {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 65px;
+  height: 65px;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.instructions-img {
+  width: 50px;
+  height: 50px;
+}
+
+.instructions-floating:hover {
+  transform: scale(1.3);
+}
+.instructions-panel {
+  position: fixed;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 45px;
+  border: 3px solid #000000;
+  border-radius: 25px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  max-width: 550px;
+  z-index: 1001;
+}
+
+.instructions-panel::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+#instrTitle {
+  font-size: 3rem;
+  margin-bottom: 25px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.instructions-panel ul {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.instructions-panel li {
+  padding: 8px 0;
+  padding-left: 30px;
+  position: relative;
+  color: #333333;
+  line-height: 1.4;
+  font-size: 1.6rem;
+}
+
+.instructions-panel li::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  color: #000000;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.congrats-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 50px;
+  border: 3px solid #000000;
+  border-radius: 30px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  max-width: 550px;
+  z-index: 1001;
+  animation: celebrate 0.6s ease-out;
+}
+
+@keyframes celebrate {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.05) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+}
+
+.congrats-panel::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+#congratsTitle {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  color: #000000;
+  font-weight: 700;
+  font-family: "Lexend Zetta", sans-serif;
+}
+
+#congratsMessage {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333333;
+  font-weight: 500;
+}
+
+.congrats-time {
+  font-size: 2.3rem;
+  margin-bottom: 35px;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+}
+
+.congrat-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.congrat-actions .btn {
+  flex: 1;
+  min-width: 150px;
 }
