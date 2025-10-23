@@ -184,12 +184,12 @@ function updateProgress() {
   const cupsFound = foundCups.length;
   for (let i = 1; i <= 5; i++) {
     const progressCup = document.getElementById(`progress-cup-${i}`);
-    if (progressCup) {
-      if (i <= cupsFound) {
-        progressCup.src = `progress/white-cup.png`;
-      } else {
-        progressCup.src = `progress/grey-cup.png`;
-      }
+    if (!progressCup) continue;
+    if (i <= cupsFound) {
+      progressCup.src = `progress/white-cup.png`;
+    } else {
+      progressCup.src = `progress/grey-cup.png`;
+      progressCup.classList.remove("active");
     }
   }
 }

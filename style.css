@@ -93,6 +93,11 @@ body {
   letter-spacing: 0.5px;
 }
 
+#start-button {
+  padding: 20px 70px;
+  font-size: 3rem;
+}
+
 .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
@@ -105,6 +110,7 @@ body {
 .btn.small {
   padding: 12px 35px;
   font-size: 1.15rem;
+  border: 3px solid #000000;
 }
 
 #resetBtn {
@@ -341,7 +347,7 @@ body {
 }
 
 .message {
-  font-size: 1.8rem;
+  font-size: 2rem;
   text-align: center;
   line-height: 1.6;
 }
@@ -376,28 +382,18 @@ body {
 }
 .instructions-panel {
   position: fixed;
-  width: 90%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #f4f2e9;
   padding: 45px;
-  border: 3px solid #000000;
   border-radius: 25px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
   max-width: 550px;
+  width: 90%;
   z-index: 1001;
-}
-
-.instructions-panel::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
+  border: 3px solid #000000;
+  background-clip: padding-box;
 }
 
 #instrTitle {
@@ -435,7 +431,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: rgb(230, 220, 180);
   padding: 50px;
   border: 3px solid #000000;
   border-radius: 30px;
@@ -443,6 +439,7 @@ body {
   max-width: 550px;
   z-index: 1001;
   animation: celebrate 0.6s ease-out;
+  background-clip: padding-box;
 }
 
 @keyframes celebrate {
@@ -459,23 +456,15 @@ body {
   }
 }
 
-.congrats-panel::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
 #congratsTitle {
-  font-size: 4rem;
+  font-size: 3rem;
   margin-bottom: 15px;
   color: #000000;
   font-weight: 700;
-  font-family: "Lexend Zetta", sans-serif;
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "HEXP" 0;
 }
 
 #congratsMessage {
