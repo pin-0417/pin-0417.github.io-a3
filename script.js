@@ -9,6 +9,8 @@ const hotspots = [
 let foundCups = [];
 let timerSeconds = 0;
 let timerInterval = null;
+let backgroundMusic = null;
+let congratsSound = null;
 
 const homeScreen = document.getElementById("home-screen");
 const gameScreen = document.getElementById("game-screen");
@@ -40,6 +42,16 @@ function init() {
   createHotspots();
   createProgressCups();
   positionCoffeeCups();
+  initAudio();
+}
+
+function initAudio() {
+  backgroundMusic = new Audio("sounds/background-music.mp3");
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.18;
+  congratsSound = new Audio("sounds/congratulations.mp3");
+  congratsSound.volume = 1.0;
+  console.log(congratsSound);
 }
 
 // Position the colored coffee cup images over the hotspots
@@ -107,6 +119,12 @@ function startGame() {
   updateProgress();
   updateMessage();
   resetHotspots();
+  if (backgroundMusic) {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play().catch(function (error) {
+      console.log("Audio playback failed:", error);
+    });
+  }
 }
 
 // Navigate back to home screen
@@ -116,6 +134,11 @@ function goToHome() {
   homeScreen.classList.remove("hidden");
   stopTimer();
   hideInstructions();
+  removeOverlay();
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+  }
 }
 
 // Reset the game state
@@ -128,6 +151,13 @@ function resetGame() {
   updateMessage();
   resetHotspots();
   congratsPanel.classList.add("hidden");
+  removeOverlay();
+  if (backgroundMusic) {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play().catch(function (error) {
+      console.log("Audio playback failed:", error);
+    });
+  }
 }
 
 // Reset hotspots and coffee cups
@@ -187,6 +217,7 @@ function updateProgress() {
     if (!progressCup) continue;
     if (i <= cupsFound) {
       progressCup.src = `progress/white-cup.png`;
+      progressCup.classList.add("active");
     } else {
       progressCup.src = `progress/grey-cup.png`;
       progressCup.classList.remove("active");
@@ -219,23 +250,51 @@ function checkWin() {
 function showCongrats() {
   congratsPanel.classList.remove("hidden");
   congratsTime.textContent = `Time: ${formatTime(timerSeconds)}`;
+  createOverlay();
+  if (backgroundMusic) {
+    backgroundMusic.pause();
+  }
+  if (congratsSound) {
+    congratsSound.currentTime = 0;
+    congratsSound.play().catch(function (error) {
+      console.log("Congrats sound playback failed:", error);
+    });
+  }
 }
 
 // Hide congratulations panel
 function hideCongrats() {
   congratsPanel.classList.add("hidden");
+  removeOverlay();
+}
+
+function createOverlay() {
+  removeOverlay();
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+  overlay.id = "modal-overlay";
+  document.body.appendChild(overlay);
+}
+
+function removeOverlay() {
+  const overlay = document.getElementById("modal-overlay");
+  if (overlay) {
+    overlay.remove();
+  }
 }
 
 // Show instructions panel
 function showInstructions() {
   instructionsPanel.classList.remove("hidden");
   instructionsBtn.setAttribute("aria-expanded", "true");
+  createOverlay();
 }
 
 // Close instructions panel
 function hideInstructions() {
   instructionsPanel.classList.add("hidden");
   instructionsBtn.setAttribute("aria-expanded", "false");
+  removeOverlay();
 }
 
 // Timer functions
