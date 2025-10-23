@@ -14,9 +14,24 @@
       rel="stylesheet"
     />
   </head>
+  <!-- Hidden City is an interactive hidden object game in a browser-based environment, 
+   centered around the act of clicking. Users explore a black-and-white city illustration, 
+   searching for five hidden coffee cups. The game engages players through visual attention, 
+   exploration, and reward-based feedback, making every click a moment of discovery. -->
+
+  <!-- The design emphasizes simplicity and clarity, aiming for a single, carefully crafted 
+    "click experience" rather than complex interactions. In today's world, where people are 
+    constantly on the go, scrolling or clicking content without truly paying attention, this 
+    prototype aims to create a small moment of slowing down. Inspired by games like “Where’s Wally” 
+    and “Hidden Folks,” I chose urban illustrations to create a calming atmosphere of exploration. 
+    This minimalism fosters meaningful feedback, ease of use, and aesthetic consistency. -->
   <body>
     <main class="app">
       <!-- Home page -->
+      <!-- The interaction flow begins with a homepage that introduces the game concept before 
+        users even click. This provides a cognitive orientation, ensuring that first-time users 
+        aren't overwhelmed, while repeat players can jump directly to the challenges. Once players 
+        enter the main game area, they can immediately begin interacting with the city illustrations. -->
       <section id="home-screen" class="screen">
         <div class="home-panel">
           <h1 id="title">Hidden City</h1>
@@ -33,17 +48,27 @@
         <div class="game-container">
           <header class="game-header">
             <div class="header-left">
+              <!-- The homepage navigation not only reinforces the game's branding but
+                  also provides a consistent point of return for users. Its placement on 
+                  the left side aligns with traditional web navigation patterns, helping 
+                  users intuitively connect this area to the "Back" or "Exit" actions. -->
               <button id="homeNav" class="home-nav" title="Back to Home">
                 Hidden City
               </button>
             </div>
             <div class="header-center">
+              <!-- This small image of a coffee cup and a text label visually cue the user 
+                 to always know what item to look for, without having to pause or open the help panel. -->
               <div class="hint">
                 <img src="hint.png" alt="Hint Icon" class="hint-icon" />
                 <div class="hint-label">Find: Coffee Cup</div>
               </div>
             </div>
             <div class="header-right">
+              <!-- The timer on the right provides players with immediate performance feedback, 
+                 psychologically motivating them to complete tasks while also providing measurable progress. 
+                 The continuous display of the timer, with no time limit, allows users to self-assess their 
+                 pacing without feeling pressured. -->
               <div id="timer" class="timer" aria-live="polite">00:00</div>
             </div>
           </header>
@@ -95,6 +120,11 @@
           </div>
 
           <!-- Scoreboard -->
+          <!-- I designed the progress bar as a series of five small coffee cup icons to 
+            match the theme. Every time the player successfully clicks on one of the progress
+            icons, it changes from a neutral gray to a warm color, serving as visual confirmation,
+            helping players better track their achievements, reducing cognitive load, and boosting
+            player confidence. -->
           <aside class="hud">
             <div class="scoreboard">
               <div id="progress-container" class="progress-container"></div>
@@ -126,6 +156,9 @@
       </button>
 
       <!-- Instructions panel -->
+      <!-- A floating exclamation point icon is placed in the bottom corner of the interface, 
+        allowing users to access game instructions at any time without leaving the current screen, 
+        improving accessibility and reducing confusion. -->
       <div id="instructionsPanel" class="instructions-panel hidden">
         <h4 id="instrTitle">How to play</h4>
         <ul>

@@ -1,3 +1,13 @@
+// Each click interaction provides multimodal feedback. Visually, the cup changes color,
+// and soft background music provides auditory feedback. A timer tracks game duration,
+// and a progress bar indicates the number of remaining cups, providing cognitive guidance.
+//  These elements ensure that users can clearly and immediately confirm the success of
+// the game while also ensuring accessibility and inclusiveness.
+
+// One of the challenges in this project was placing the hotspot precisely where the cup would be.
+//  Because I had already drawn the illustration and positioned the cup, I used CSS to create a
+// clear feedback loop when the hotspot appeared on hover, allowing me to better adjust the size
+// of the hotspot and integrate it into the visually complex area.
 const hotspots = [
   { id: "hotspot-1", x: 3.5, y: 11, width: 3, height: 3, cupId: 2 },
   { id: "hotspot-2", x: 61, y: 18, width: 3, height: 3, cupId: 5 },
@@ -45,12 +55,21 @@ function init() {
   initAudio();
 }
 
+// Audio Reference:
+// geoffharvey(11 August 2025) 'Little Creatures - Cute Theme', Pixabay.https://pixabay.com/music/cartoons-little-creatures-cute-theme-386992/.  Accessed 23 Oct 2025.
+// u_2gxydaiwcd(13 May 2025) 'success', Pixabay. https://pixabay.com/sound-effects/success-340660/. Accessed 23 Oct 2025.
+
 function initAudio() {
+  // Gentle background music keeps players focused without adding pressure or urgency,
+  // reinforcing the atmosphere of exploration.
   backgroundMusic = new Audio("sounds/background-music.mp3");
   backgroundMusic.loop = true;
   backgroundMusic.volume = 0.18;
+  // Success sound effects serve as immediate reward cues. This auditory feedback,
+  // combined with the visual presentation of all found cups, creates a multi-sensory
+  // moment of completion, fostering a sense of accomplishment and excitement.
   congratsSound = new Audio("sounds/congratulations.mp3");
-  congratsSound.volume = 1.0;
+  congratsSound.volume = 0.5;
   console.log(congratsSound);
 }
 

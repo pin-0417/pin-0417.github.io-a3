@@ -1,3 +1,16 @@
+/* I utilized a monochromatic black and white design as the primary visual element. 
+By removing color from the background, I direct the user's attention to interactive 
+elements and reinforce the concept of "discovery," establishing a calm and focused 
+visual hierarchy. The black and white theme also evokes the aesthetic of hand-drawn 
+line art or newspaper illustrations, echoing the concept of urban observation. 
+The colorful coffee cup serves as the only striking accent, symbolizing discovery and
+ completion, creating a sense of satisfaction and contrast. */
+
+/* The game's visual identity is intentionally limited to a grayscale palette, 
+ and the font uses a clean, modern tone to complement the website's style. The minimalist 
+ use of color enhances usability, reduces cognitive load, and allows players to explore
+  and perceive the details of the illustrations without distraction. */
+
 * {
   margin: 0;
   padding: 0;
@@ -277,13 +290,18 @@ body {
 
 .coffee-cup.found {
   opacity: 1;
-  transform: fadeIn 0.6s ease-out;
+  transform: pop 0.4s ease-out;
 }
-@keyframes fadeIn {
-  from {
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
     opacity: 0;
   }
-  to {
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -399,6 +417,10 @@ body {
 .instructions-floating:hover {
   transform: scale(1.3);
 }
+
+/* When either the Instructions Panel or the Congratulations Panel is active, 
+a translucent dark overlay appears behind it, darkening the rest of the interface 
+and directing the player's attention to the front panel, maintaining visual clarity. */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -456,6 +478,9 @@ body {
   line-height: 1.4;
 }
 
+/* The Congratulations Panel uses a light beige background and animation to give success 
+a slightly celebratory tone. However, it follows the visual system of the rest of the game, 
+creating a pop-up effect that conveys a sense of accomplishment. */
 .congrats-panel {
   position: fixed;
   top: 50%;
